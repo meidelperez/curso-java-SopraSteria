@@ -1,5 +1,6 @@
 package ejercicio01dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import com.curso.java.oo.ejercicio01oo.clases.Aula;
 
 public class ListAulaDao implements IAulaDAO {
 
-	private List<Aula> listAulas ;
+	private List<Aula> listAulas;
 
 	public void insertAula(Aula aula) {
 		listAulas.add(aula);
@@ -60,9 +61,9 @@ public class ListAulaDao implements IAulaDAO {
 
 	}
 
-	public ListAulaDao(List<Aula> listAulas) {
+	public ListAulaDao() {
 		super();
-		this.listAulas = listAulas;
+		this.listAulas = new ArrayList<Aula>();
 	}
 
 }

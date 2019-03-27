@@ -26,8 +26,7 @@ public class logicaAula {
 
 	}
 
-	// terminar
-	public void asignarAlumnoAlAula(Estudiante alumno, Aula aula) {
+	public void asignarAlumnoAlAula(Estudiante alumno, Aula aula) throws Exception {
 		Collection<Puesto> puestos = aula.getPuestosDeEstudiantes();
 		Iterator<Puesto> iter = puestos.iterator();
 		boolean encontradoLugar = false;
@@ -37,18 +36,10 @@ public class logicaAula {
 			if (puesto.getPersona() == null) {
 				puesto.setPersona(alumno);
 				encontradoLugar = true;
-//				System.out.println("Alumno "+ alumno.getName().toUpperCase()+" insertado en el aula "+ aula.getNombre()+".");
-
 			}
-
-//		for (Puesto puesto : puestos) {
-//			if(puesto.getPersona() == null) {
-//				puesto.setPersona(alumno);
-//				break;
-//			}
 		}
 		if (!encontradoLugar) {
-			System.out.println("No hay lugar en el aula");
+			throw new Exception("No hay espacio para el alumno");
 		}
 	}
 
@@ -76,9 +67,44 @@ public class logicaAula {
 		return profesores;
 	}
 
-	public logicaAula(IAulaDAO aulaDao) {
+	public logicaAula(IAulaDAO miDao) {
 		super();
-		this.aulaDao = aulaDao;
+		this.aulaDao = miDao;
 	}
+
+	@Override
+	public String toString() {
+		return "logicaAula [aulaDao=" + aulaDao + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aulaDao == null) ? 0 : aulaDao.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		logicaAula other = (logicaAula) obj;
+		if (aulaDao == null) {
+			if (other.aulaDao != null)
+				return false;
+		} else if (!aulaDao.equals(other.aulaDao))
+			return false;
+		return true;
+	}
+
+	public logicaAula() {
+		super();
+	}
+	
 
 }

@@ -1,7 +1,6 @@
 package mainmap;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ import ejercicio01negocio.logicaAula;
 
 public class LanzadorMap {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Collection<Puesto> puestosEstudiantes = new HashSet<Puesto>();
 		Collection<Puesto> puestosEstudiantes1 = new HashSet<Puesto>();
 		Estudiante alumno1 = new Estudiante("Meidel", "Perez", "55350125G", "Universitario", true, 8);
@@ -35,7 +34,7 @@ public class LanzadorMap {
 		puestosEstudiantes1.add(puesto3);
 		Aula aula = new Aula(true, "Caliso", true, (Set<Puesto>) puestosEstudiantes);
 		Aula aula1 = new Aula(true, "Ketler", true, (Set<Puesto>) puestosEstudiantes1);
-		logicaAula negocio = new logicaAula(new MapAulaDao(new HashMap<String ,Aula>()));
+		logicaAula negocio = new logicaAula(new MapAulaDao());
 		negocio.crearNuevaAula(aula1);
 		negocio.crearNuevaAula(aula);
 		negocio.asignarAlumnoAlAula(alumno1, aula);

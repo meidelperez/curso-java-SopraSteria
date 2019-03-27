@@ -1,6 +1,7 @@
 package ejercicio01dao;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.curso.java.oo.ejercicio01oo.clases.Aula;
@@ -37,9 +38,9 @@ public class MapAulaDao implements IAulaDAO {
 
 	}
 
-	public MapAulaDao(Map<String, Aula> aulas) {
+	public MapAulaDao() {
 		super();
-		this.aulas = aulas;
+		this.aulas = new HashMap<String, Aula>();
 	}
 
 }

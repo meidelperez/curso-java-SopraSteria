@@ -1,6 +1,5 @@
 package mainlist;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +14,7 @@ import ejercicio01negocio.logicaAula;
 
 public class LanzadorList {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Collection<Puesto> puestosEstudiantes = new HashSet<Puesto>();
 		Collection<Puesto> puestosEstudiantes1 = new HashSet<Puesto>();
 		Estudiante alumno1 = new Estudiante("Meidel", "Perez", "55350125G", "Universitario", true, 8);
@@ -35,7 +34,7 @@ public class LanzadorList {
 		puestosEstudiantes1.add(puesto3);
 		Aula aula = new Aula(true, "Caliso", true, (Set<Puesto>) puestosEstudiantes);
 		Aula aula1 = new Aula(true, "Ketler", true, (Set<Puesto>) puestosEstudiantes1);
-		logicaAula negocio = new logicaAula(new ListAulaDao(new ArrayList<Aula>()));
+		logicaAula negocio = new logicaAula(new ListAulaDao());
 		negocio.crearNuevaAula(aula1);
 		negocio.crearNuevaAula(aula);
 		negocio.asignarAlumnoAlAula(alumno1, aula);
@@ -43,13 +42,13 @@ public class LanzadorList {
 		negocio.asignarAlumnoAlAula(alumno3, aula1);
 		negocio.asignarAlumnoAlAula(alumno4, aula1);
 		Collection<Persona> listaAlumnosAula = negocio.listaDeAlumnosPorAula("Caliso");
-		int i =1;
+		int i = 1;
 		for (Persona estudiante : listaAlumnosAula) {
-			System.out.println("Nombre estudiante "+i+ " " +estudiante.getName() + "en el aula Caliso" );
-		i++;
+			System.out.println("Nombre estudiante " + i + " " + estudiante.getName() + "en el aula Caliso");
+			i++;
 		}
 		negocio.eliminarAula("Ketler");
-		
+
 	}
 
 }
