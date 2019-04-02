@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
 import com.curso.java.oo.ejercicio01oo.clases.Aula;
 
+@Repository
 public class ListAulaDao implements IAulaDAO {
-
+	@Autowired
+	@Qualifier("collectionArrayList")
 	private List<Aula> listAulas;
 
 	public void insertAula(Aula aula) {
@@ -33,10 +39,7 @@ public class ListAulaDao implements IAulaDAO {
 		listAulas.add(aula);
 	}
 
-	public void deleteAula(Aula aula) {
-		listAulas.remove(aula);
-	}
-
+	
 	public Aula getAulaById(String id) {
 		Aula aula = null;
 		int i = 0;
@@ -58,12 +61,51 @@ public class ListAulaDao implements IAulaDAO {
 	}
 
 	public void deleteAula(String identificadorUnicoAula) {
+		listAulas.remove(getAulaById(identificadorUnicoAula));
 
 	}
 
 	public ListAulaDao() {
 		super();
 		this.listAulas = new ArrayList<Aula>();
+	}
+
+	@Override
+	public String toString() {
+		return "ListAulaDao [listAulas=" + listAulas + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((listAulas == null) ? 0 : listAulas.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ListAulaDao other = (ListAulaDao) obj;
+		if (listAulas == null) {
+			if (other.listAulas != null)
+				return false;
+		} else if (!listAulas.equals(other.listAulas))
+			return false;
+		return true;
+	}
+
+	public List<Aula> getListAulas() {
+		return listAulas;
+	}
+
+	public void setListAulas(List<Aula> listAulas) {
+		this.listAulas = listAulas;
 	}
 
 }

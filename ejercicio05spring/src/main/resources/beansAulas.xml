@@ -6,5 +6,10 @@
 	<bean id="negocio" class="ejercicio01negocio.logicaAula">
 
 	</bean>
+	<bean id="miDAo" class="ejercicio01DAO.ListAulaDAO"/>
+	<!-- bean id="miDao" class="ejercicio01DAO.MapAulaDAO">
+		<property name="mapAulas" ></property>
+
+	</bean-->
 
 </beans>

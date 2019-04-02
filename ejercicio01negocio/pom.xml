@@ -4,24 +4,31 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.curso.java.ejercio01negocio</groupId>
 	<artifactId>ejercicio01negocio</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
+	<properties>
+
+		<!-- Esto lo hacemos para cambiar la version de java sin tener q copiar 
+			el Plugin -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<!-- Esto es para establecer el encoding de origen y del artefacto -->
+		<project.buil.outputEncoding>UTF-8</project.buil.outputEncoding>
+		<project.buil.sourceEncoding>UTF-8</project.buil.sourceEncoding>
+
+	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.curso.java.ejercicio01dao</groupId>
 			<artifactId>ejercicio01dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

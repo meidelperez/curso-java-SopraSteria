@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.curso.java.oo.ejercicio01oo.clases.Aula;
 import com.curso.java.oo.ejercicio01oo.clases.Estudiante;
-import com.curso.java.oo.ejercicio01oo.clases.Persona;
 import com.curso.java.oo.ejercicio01oo.clases.Puesto;
 
 import ejercicio01dao.MapAulaDao;
@@ -34,20 +36,20 @@ public class LanzadorMap {
 		puestosEstudiantes1.add(puesto3);
 		Aula aula = new Aula(true, "Caliso", true, (Set<Puesto>) puestosEstudiantes);
 		Aula aula1 = new Aula(true, "Ketler", true, (Set<Puesto>) puestosEstudiantes1);
-		logicaAula negocio = new logicaAula(new MapAulaDao());
+
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansMapAulasDAO.xml");
+		MapAulaDao listAula = (MapAulaDao) applicationContext.getBean("miDao");
+
+		logicaAula negocio = new logicaAula(listAula);
 		negocio.crearNuevaAula(aula1);
 		negocio.crearNuevaAula(aula);
 		negocio.asignarAlumnoAlAula(alumno1, aula);
 		negocio.asignarAlumnoAlAula(alumno2, aula);
 		negocio.asignarAlumnoAlAula(alumno3, aula1);
 		negocio.asignarAlumnoAlAula(alumno4, aula1);
-		Collection<Persona> listaAlumnosAula = negocio.listaDeAlumnosPorAula("Caliso");
-		int i =1;
-		for (Persona estudiante : listaAlumnosAula) {
-			System.out.println("Nombre estudiante "+i+ " " +estudiante.getName() + "en el aula Caliso" );
-		i++;
-		}
+//		Collection<Persona> listaAlumnosAula = negocio.listaDeAlumnosPorAula("Caliso");
 		negocio.eliminarAula("Ketler");
+		System.out.println(negocio.listaDeAlumnosPorAula("Caliso"));
 
 	}
 

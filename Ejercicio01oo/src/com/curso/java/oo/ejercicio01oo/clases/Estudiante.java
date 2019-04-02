@@ -1,17 +1,55 @@
 package com.curso.java.oo.ejercicio01oo.clases;
 
-public class Estudiante extends Persona {
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-	private String estudiosCursados;
-	private boolean atiendeEnClases;
+@Component
+@Scope(value = "prototype")
+public class Estudiante extends Persona {
+	@Value("false")
+	private Boolean subvencionado;
 	private Integer calificacion;
 
-	public Estudiante(String name, String apellidos, String carnetDeIdentidad, String estudiosCursados,
-			boolean atiendeEnClases, Integer calificacion) {
-		super(name, apellidos, carnetDeIdentidad);
-		this.estudiosCursados = estudiosCursados;
-		this.atiendeEnClases = atiendeEnClases;
-		this.calificacion = calificacion;
+	@Override
+	public String toString() {
+		return "Estudiante [ atiendeEnClases=" + subvencionado + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (subvencionado ? 1231 : 1237);
+		result = prime * result + ((calificacion == null) ? 0 : calificacion.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estudiante other = (Estudiante) obj;
+		if (subvencionado != other.subvencionado)
+			return false;
+		if (calificacion == null) {
+			if (other.calificacion != null)
+				return false;
+		} else if (!calificacion.equals(other.calificacion))
+			return false;
+		return true;
+	}
+
+	public Boolean getSubvencionado() {
+		return subvencionado;
+	}
+
+	public void setSubvencionado(Boolean subvencionado) {
+		this.subvencionado = subvencionado;
 	}
 
 	public Integer getCalificacion() {
@@ -22,19 +60,6 @@ public class Estudiante extends Persona {
 		this.calificacion = calificacion;
 	}
 
-	public String getEstudiosCursados() {
-		return estudiosCursados;
-	}
+	
 
-	public void setEstudiosCursados(String estudiosCursados) {
-		this.estudiosCursados = estudiosCursados;
-	}
-
-	public boolean getAtiendeEnClases() {
-		return atiendeEnClases;
-	}
-
-	public void setAtiendeEnClases(boolean atiendeEnClases) {
-		this.atiendeEnClases = atiendeEnClases;
-	}
 }

@@ -1,18 +1,26 @@
 package ejercicio01negocio;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.curso.java.oo.ejercicio01oo.clases.Aula;
-import com.curso.java.oo.ejercicio01oo.clases.Estudiante;
 import com.curso.java.oo.ejercicio01oo.clases.Persona;
 import com.curso.java.oo.ejercicio01oo.clases.Profesor;
 import com.curso.java.oo.ejercicio01oo.clases.Puesto;
 
 import ejercicio01dao.IAulaDAO;
+import ejercicio01dao.ListAulaDao;
 
-public class logicaAula {
+@Service
+public class LogicaAula {
+	@Autowired
+	@Qualifier("miDao")
 	private IAulaDAO aulaDao;
 
 	public void crearNuevaAula(Aula aula) {
@@ -26,7 +34,7 @@ public class logicaAula {
 
 	}
 
-	public void asignarAlumnoAlAula(Estudiante alumno, Aula aula) throws Exception {
+	public void asignarAlumnoAlAula(Persona alumno, Aula aula) throws Exception {
 		Collection<Puesto> puestos = aula.getPuestosDeEstudiantes();
 		Iterator<Puesto> iter = puestos.iterator();
 		boolean encontradoLugar = false;
@@ -39,16 +47,16 @@ public class logicaAula {
 			}
 		}
 		if (!encontradoLugar) {
-			throw new Exception("No hay espacio para el alumno");
+//			throw new Exception("No hay espacio para el alumno");
 		}
 	}
 
 	public Collection<Persona> listaDeAlumnosPorAula(String idAula) {
-		Collection<Persona> estudiantes = new HashSet<Persona>();
+		Collection<Persona> estudiantes = new ArrayList<Persona>();
 		Collection<Puesto> puestos = aulaDao.getAulaById(idAula).getPuestosDeEstudiantes();
 		for (Puesto puesto : puestos) {
 			if (puesto.getPersona() != null) {
-				estudiantes.add((Estudiante) puesto.getPersona());
+				estudiantes.add((Persona) puesto.getPersona());
 			}
 		}
 
@@ -67,9 +75,13 @@ public class logicaAula {
 		return profesores;
 	}
 
-	public logicaAula(IAulaDAO miDao) {
+	public LogicaAula(IAulaDAO miDao) {
 		super();
 		this.aulaDao = miDao;
+	}
+
+	public LogicaAula() {
+		aulaDao = new ListAulaDao();
 	}
 
 	@Override
@@ -93,7 +105,7 @@ public class logicaAula {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		logicaAula other = (logicaAula) obj;
+		LogicaAula other = (LogicaAula) obj;
 		if (aulaDao == null) {
 			if (other.aulaDao != null)
 				return false;
@@ -102,9 +114,12 @@ public class logicaAula {
 		return true;
 	}
 
-	public logicaAula() {
-		super();
+	public IAulaDAO getAulaDao() {
+		return aulaDao;
 	}
-	
+
+	public void setAulaDao(IAulaDAO aulaDao) {
+		this.aulaDao = aulaDao;
+	}
 
 }
