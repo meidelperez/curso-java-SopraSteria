@@ -71,7 +71,7 @@ public class LogicaAula {
 
 		operacion.setFecha(new Date());
 		operacion.setDescripcionOperacion(
-				"Se ha asignado el alumno: " + alumno.getName() + "al aula: " + aula.getNombre());
+				"Se ha asignado el alumno: " + alumno.getName() + " al aula: " + aula.getNombre());
 		operacion.setTipoDeOperacion("Insertar alumno en aula");
 		operacionesDao.insertarOperacion(operacion);
 
