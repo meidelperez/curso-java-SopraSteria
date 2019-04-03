@@ -12,8 +12,6 @@ public class Profesor extends Persona {
 	@Value("false")
 	private Boolean esMajo;
 
-	
-
 	public String getGradoDeProfesor() {
 		return gradoDeProfesor;
 	}

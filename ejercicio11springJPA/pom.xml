@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.curso.java.springjpa</groupId>
+	<artifactId>ejercicio11springJPA</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+
+		<!-- Esto lo hacemos para cambiar la version de java sin tener q copiar 
+			el Plugin -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<!-- Esto es para establecer el encoding de origen y del artefacto -->
+		<project.buil.outputEncoding>UTF-8</project.buil.outputEncoding>
+		<project.buil.sourceEncoding>UTF-8</project.buil.sourceEncoding>
+
+		<!-- Esta propiedad me la acabo de inventar no produce enfecto en el rpoyecto -->
+		<spring.framework.version>5.1.5.RELEASE</spring.framework.version>
+
+	</properties>
+	<dependencies>
+		<!-- Dependencias de Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		<!-- Dependencias para spring jpa -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-jdbc</artifactId>
+  		<version>${spring.framework.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-orm</artifactId>
+  		<version>${spring.framework.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-tx</artifactId>
+  		<version>${spring.framework.version}</version>
+  	</dependency>
+  	<!-- jdbc driver Está la clase Driver
+  			com.mysql.jdbc.Driver // Privado
+  			com.mysql.cj.jdbc.MysqlDataSource // Driver XA
+  	 -->
+  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>8.0.15</version>
+  	</dependency>
+  	<!-- La implementación de JPA que voy a utilizar -->
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-entitymanager</artifactId>
+  		<version>5.4.2.Final</version>
+  	</dependency>
+
+
+	</dependencies>
+</project>

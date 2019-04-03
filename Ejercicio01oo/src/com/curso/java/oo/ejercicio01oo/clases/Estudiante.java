@@ -60,6 +60,4 @@ public class Estudiante extends Persona {
 		this.calificacion = calificacion;
 	}
 
-	
-
 }
