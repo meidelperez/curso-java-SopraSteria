@@ -10,17 +10,19 @@ import org.springframework.stereotype.Repository;
 
 import com.curso.java.oo.ejercicio01oo.clases.Aula;
 
-@Repository
+@Repository("miDao")
 public class ListAulaDao implements IAulaDAO {
 	@Autowired
 	@Qualifier("collectionArrayList")
 	private List<Aula> listAulas;
 
+	@Override
 	public void insertAula(Aula aula) {
 		listAulas.add(aula);
 
 	}
 
+	@Override
 	public void updateAula(Aula aula) {
 		int i = 0;
 		boolean encontradaAula = false;
@@ -35,11 +37,12 @@ public class ListAulaDao implements IAulaDAO {
 
 	}
 
+	@Override
 	public void createAula(Aula aula) {
 		listAulas.add(aula);
 	}
 
-	
+	@Override
 	public Aula getAulaById(String id) {
 		Aula aula = null;
 		int i = 0;
@@ -56,10 +59,12 @@ public class ListAulaDao implements IAulaDAO {
 		return aula;
 	}
 
+	@Override
 	public Collection<Aula> getTodasLasAulas() {
 		return listAulas;
 	}
 
+	@Override
 	public void deleteAula(String identificadorUnicoAula) {
 		listAulas.remove(getAulaById(identificadorUnicoAula));
 

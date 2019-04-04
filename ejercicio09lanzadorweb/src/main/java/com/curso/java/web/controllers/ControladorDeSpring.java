@@ -36,7 +36,7 @@ public class ControladorDeSpring {
 
 	}
 
-	@RequestMapping("crearAula")
+	@RequestMapping("aulasMapeo")
 	public ModelAndView mirarAula(@RequestParam("nombreAula") String nombreAula) throws Exception {
 		Collection<Aula> aulas = negocio.getAulaDao().getTodasLasAulas();
 //		alumno.setName(nombreAlumno);
@@ -53,7 +53,8 @@ public class ControladorDeSpring {
 		}
 
 		ModelAndView modelAndView = new ModelAndView("aulas");
-		modelAndView.addObject("mostrar", negocio.getAulaDao().getAulaById(nombreAula));
+		modelAndView.addObject("aula", negocio.getAulaDao().getAulaById(nombreAula));
+		modelAndView.addObject("persona", negocio.listaDeAlumnosPorAula(nombreAula));
 		return modelAndView;
 
 	}

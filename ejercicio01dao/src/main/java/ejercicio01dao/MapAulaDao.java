@@ -10,35 +10,41 @@ import org.springframework.stereotype.Repository;
 
 import com.curso.java.oo.ejercicio01oo.clases.Aula;
 
-@Repository("miDao")
+@Repository
 public class MapAulaDao implements IAulaDAO {
 	@Autowired
 	@Qualifier("collectionHashMap")
 	private Map<String, Aula> mapAulas;
 
+	@Override
 	public void updateAula(Aula aula) {
 		mapAulas.put(aula.getNombre(), aula);
 	}
 
+	@Override
 	public void createAula(Aula aula) {
 		mapAulas.put(aula.getNombre(), aula);
 
 	}
 
+	@Override
 	public void deleteAula(String identificadorUnicoAula) {
 		mapAulas.remove(identificadorUnicoAula);
 	}
 
+	@Override
 	public Aula getAulaById(String id) {
 		return mapAulas.get(id);
 
 	}
 
+	@Override
 	public Collection<Aula> getTodasLasAulas() {
 
 		return mapAulas.values();
 	}
 
+	@Override
 	public void insertAula(Aula aula) {
 		mapAulas.put(aula.getNombre(), aula);
 

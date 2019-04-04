@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Bienvenidos a Spring MVC</h1>
-	<form action="aulas">
+	<form action="aulasMapeo">
 		Nombre del Aula: <input type="text" name="nombreAula"/><br/>
 		Nombre del Alumno: <input type="text" name="nombreAlumno"/><br/>
 		<input type="submit" value="Asignar alumno al aula y si no existe el aula, creala y asigna el alumno!">

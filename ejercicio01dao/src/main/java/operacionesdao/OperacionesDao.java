@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.curso.java.oo.ejercicio01oo.clases.Operaciones;
 
-@Repository
-public class operacionesDao implements IOperacionesDAO {
+@Repository(value = "operacionesdao")
+public class OperacionesDao implements IOperacionesDAO {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -44,6 +44,16 @@ public class operacionesDao implements IOperacionesDAO {
 	public Operaciones buscar(int id) {
 		return manager.find(Operaciones.class, id);
 
+	}
+
+	public OperacionesDao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "OperacionesDao []";
 	}
 
 }

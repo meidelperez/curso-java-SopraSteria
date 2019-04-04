@@ -8,7 +8,7 @@
 </head>
 <body>
 	Aula: ${aula.nombre} - ${aula.tienePizarra}
-	<br /> Alumno: ${persona.nombre} 
+	<br /> Alumno: ${persona.toString()} 
 	<br />
 	<%-- Puesto: ${puesto.mesa} - ${puesto.persona}<br/> --%>
 	<%-- Session: ${mensajeSession.nombre} - ${mensajeSession.descripcion}<br/> --%>

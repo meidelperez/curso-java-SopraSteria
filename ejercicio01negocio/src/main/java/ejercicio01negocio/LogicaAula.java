@@ -1,8 +1,8 @@
 package ejercicio01negocio;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -18,7 +18,6 @@ import com.curso.java.oo.ejercicio01oo.clases.Profesor;
 import com.curso.java.oo.ejercicio01oo.clases.Puesto;
 
 import ejercicio01dao.IAulaDAO;
-import ejercicio01dao.ListAulaDao;
 import operacionesdao.IOperacionesDAO;
 
 @Service
@@ -27,13 +26,13 @@ public class LogicaAula {
 	@Qualifier("miDao")
 	private IAulaDAO aulaDao;
 	@Autowired
+	@Qualifier("operacionesdao")
 	private IOperacionesDAO operacionesDao;
-	@Autowired
 	private Operaciones operacion;
 
 	public void crearNuevaAula(Aula aula) {
 		aulaDao.createAula(aula);
-		operacion.setFecha(new Date());
+		operacion.setFecha(Calendar.getInstance().getTime());
 		operacion.setDescripcionOperacion("Se ha creado un aula nueva con el nombre: " + aula.getNombre());
 		operacion.setTipoDeOperacion("Crear Aula");
 		operacionesDao.insertarOperacion(operacion);
@@ -43,7 +42,7 @@ public class LogicaAula {
 	@Transactional
 	public void eliminarAula(String identificadorUnicoAula) {
 		aulaDao.deleteAula(identificadorUnicoAula);
-		operacion.setFecha(new Date());
+		operacion.setFecha(Calendar.getInstance().getTime());
 		operacion.setDescripcionOperacion("Se ha eliminado un aula nueva con el nombre: " + identificadorUnicoAula);
 		operacion.setTipoDeOperacion("Eliminar Aula");
 		operacionesDao.insertarOperacion(operacion);
@@ -69,7 +68,7 @@ public class LogicaAula {
 //			throw new Exception("No hay espacio para el alumno");
 		}
 
-		operacion.setFecha(new Date());
+		operacion.setFecha(Calendar.getInstance().getTime());
 		operacion.setDescripcionOperacion(
 				"Se ha asignado el alumno: " + alumno.getName() + " al aula: " + aula.getNombre());
 		operacion.setTipoDeOperacion("Insertar alumno en aula");
@@ -109,7 +108,8 @@ public class LogicaAula {
 	}
 
 	public LogicaAula() {
-		aulaDao = new ListAulaDao();
+
+		super();
 	}
 
 	@Override
