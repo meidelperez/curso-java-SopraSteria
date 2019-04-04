@@ -1,5 +1,6 @@
 package ejercicio01negocio;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -26,16 +27,15 @@ public class LogicaAula {
 	@Qualifier("miDao")
 	private IAulaDAO aulaDao;
 	@Autowired
-	@Qualifier("operacionesdao")
 	private IOperacionesDAO operacionesDao;
 	private Operaciones operacion;
 
 	public void crearNuevaAula(Aula aula) {
 		aulaDao.createAula(aula);
-		operacion.setFecha(Calendar.getInstance().getTime());
-		operacion.setDescripcionOperacion("Se ha creado un aula nueva con el nombre: " + aula.getNombre());
-		operacion.setTipoDeOperacion("Crear Aula");
-		operacionesDao.insertarOperacion(operacion);
+		String descripcionOperacion = "Se ha creado un aula nueva con el nombre: " + aula.getNombre();
+		String tipoDeOperacion = "Crear Aula";
+		insertarEnOperaciones(new Date(new java.util.Date().getTime()), descripcionOperacion, tipoDeOperacion);
+
 //		System.out.println("Aula "+ aula.getNombre()+" creada.");
 	}
 
@@ -43,9 +43,9 @@ public class LogicaAula {
 	public void eliminarAula(String identificadorUnicoAula) {
 		aulaDao.deleteAula(identificadorUnicoAula);
 		operacion.setFecha(Calendar.getInstance().getTime());
-		operacion.setDescripcionOperacion("Se ha eliminado un aula nueva con el nombre: " + identificadorUnicoAula);
-		operacion.setTipoDeOperacion("Eliminar Aula");
-		operacionesDao.insertarOperacion(operacion);
+		String descripcionOperacion = "Se ha eliminado un aula nueva con el nombre: " + identificadorUnicoAula;
+		String tipoDeOperacion = "Eliminar Aula";
+		insertarEnOperaciones(new Date(new java.util.Date().getTime()), descripcionOperacion, tipoDeOperacion);
 
 //		System.out.println("Aula "+ identificadorUnicoAula+" eliminada.");
 
@@ -68,11 +68,9 @@ public class LogicaAula {
 //			throw new Exception("No hay espacio para el alumno");
 		}
 
-		operacion.setFecha(Calendar.getInstance().getTime());
-		operacion.setDescripcionOperacion(
-				"Se ha asignado el alumno: " + alumno.getName() + " al aula: " + aula.getNombre());
-		operacion.setTipoDeOperacion("Insertar alumno en aula");
-		operacionesDao.insertarOperacion(operacion);
+		String descripcionOperacion = "Se ha asignado el alumno: " + alumno.getName() + " al aula: " + aula.getNombre();
+		String tipoDeOperacion = "Insertar alumno en aula";
+		insertarEnOperaciones(new Date(new java.util.Date().getTime()), descripcionOperacion, tipoDeOperacion);
 
 	}
 
@@ -150,4 +148,11 @@ public class LogicaAula {
 		this.aulaDao = aulaDao;
 	}
 
+	private void insertarEnOperaciones(Date fechaDeOperacion, String descripcionOperacion, String tipoDeOperacion) {
+		operacion = new Operaciones();
+		operacion.setFecha(fechaDeOperacion);
+		operacion.setDescripcionOperacion(descripcionOperacion);
+		operacion.setTipoDeOperacion(tipoDeOperacion);
+		operacionesDao.insertarOperacion(operacion);
+	}
 }
